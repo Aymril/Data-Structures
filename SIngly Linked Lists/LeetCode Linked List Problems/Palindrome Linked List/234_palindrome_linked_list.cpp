@@ -24,7 +24,11 @@ void isPalindromeTest(Node** head, Node* middle, bool* isTrue) {
         *isTrue = false;     
     else {
         (*head) = (*head)->link;
-        *isTrue = true;
+       
+       /*
+       *isTrue = true; statement can be discarded, because we've already set is*True to true when calling isPalindromeTest function inside isPalindrome.
+       */
+    //    *isTrue = true; 
     }
 }
 
