@@ -1,5 +1,8 @@
 Node* mergeList(Node* p, Node* q)
 {
+    if (!p)
+        return q;
+
     Node* result = p, * temp;
     while (p && q) {
         if (!p->next) {
