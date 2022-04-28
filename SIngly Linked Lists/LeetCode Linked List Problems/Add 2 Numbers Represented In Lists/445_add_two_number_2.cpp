@@ -90,12 +90,12 @@ Node* addTwoNumbers(Node* l1, Node* l2) {
     Node* dummy = create_node(-1);
     dummy->next = additionAlgorithm(l1, l2, &carry);
     
-    if (carry)
-        dummy->data = 1;
-    else
-        dummy = dummy->next;
-    
-    return dummy;
+    if (carry) {
+        Node* node = create_node(carry);
+        node->next = dummy->next;
+        dummy->next = node;
+    }
+    return dummy->next;
 }
 
 
@@ -140,10 +140,11 @@ Node* addTwoNumbers(Node* l1, Node* l2) {
     Node* dummy = create_node(-1);
     dummy->next = additionAlgorithm(l1, l2, &carry);
 
-    if (carry)
-        dummy->data = 1;
-    else
-        dummy = dummy->next;
+    if (carry) {
+        Node* node = create_node(carry);
+        node->next = dummy->next;
+        dummy->next = node;
+    }
 
-    return dummy;
+    return dummy->next;
 }
