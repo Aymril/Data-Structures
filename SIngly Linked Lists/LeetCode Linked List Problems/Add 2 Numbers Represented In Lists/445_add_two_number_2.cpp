@@ -1,0 +1,149 @@
+// Cozum 1: lists are reversed, then addition done. Better way may be to add numbers without reversing lists. It'll be in the Cozum 2 part.
+
+void reverseList(Node** list) {
+    if (!list) return;
+
+    Node* first = *list;
+    Node* rest = first->next;
+
+    if (!rest) return;
+
+    reverseList(&rest);
+
+    first->next->next = first;
+    first->next = nullptr;
+
+    *list = rest;
+}
+
+Node* addTwoNumbers(Node* l1, Node* l2) {
+    reverseList(&l1);
+    reverseList(&l2);
+
+    Node* head = nullptr;
+    Node** result = &head;
+    int sum = 0;
+    while (l1 or l2 or sum) {
+        if (l1) {
+            sum += l1->data;
+            l1 = l1->next;
+        }
+
+        if (l2) {
+            sum += l2->data;
+            l2 = l2->next;
+        }
+
+        *result = create_node(sum % 10);
+        sum = sum > 9 ? 1 : 0;
+
+        result = &(*result)->next;
+    }
+    reverseList(&head);
+    return head;
+}
+
+
+// Cozum 2: 
+int listSize(Node* head) {
+    int count = 0;
+    while (head) {
+        ++count;
+        head = head->next;
+    }
+    return count;
+}
+
+Node* additionAlgorithm(Node* l1, Node* l2, int* carry) {
+    Node* head = create_node(-1);
+
+    if (l1->next && l2->next) {
+        head->next = additionAlgorithm(l1->next, l2->next, carry);
+    }
+
+    int sum = l1->data + l2->data + *carry;
+    head->data = sum % 10;
+    *carry = sum > 9 ? 1 : 0;
+    return head;
+}
+
+Node* addTwoNumbers(Node* l1, Node* l2) {
+    int l1_length = listSize(l1);
+    int l2_length = listSize(l2);
+
+    if (l1_length > l2_length) {
+        for (int i = 1; i <= l1_length - l2_length; ++i) {
+            Node* node = create_node(0);
+            node->next = l2;
+            l2 = node;
+        }
+    }
+    else if (l1_length < l2_length) {
+        for (int i = 1; i <= l2_length - l1_length; ++i) {
+            Node* node = create_node(0);
+            node->next = l1;
+            l1 = node;
+        }
+    }
+
+    int carry = 0;
+    Node* dummy = create_node(-1);
+    dummy->next = additionAlgorithm(l1, l2, &carry);
+    
+    if (carry)
+        dummy->data = 1;
+    else
+        dummy = dummy->next;
+    
+    return dummy;
+}
+
+
+// Cozum 2, Iyilestirme 1: adding zeros to top (padding) can be done without using lengths' of the lists. this way, code will be much shorter.
+Node* additionAlgorithm(Node* l1, Node* l2, int* carry) {
+    Node* head = create_node(-1);
+
+    if (l1->next && l2->next) {
+        head->next = additionAlgorithm(l1->next, l2->next, carry);
+    }
+
+    int sum = l1->data + l2->data + *carry;
+    head->data = sum % 10;
+    *carry = sum > 9 ? 1 : 0;
+    return head;
+}
+
+Node* addTwoNumbers(Node* l1, Node* l2) {
+    Node* ptr1 = l1, * ptr2 = l2;
+    while (ptr1 or ptr2) {
+        if (!ptr1) {
+            Node* node = create_node(0);
+            node->next = l1;
+            l1 = node;
+
+            ptr2 = ptr2->next;
+        }
+        else if (!ptr2) {
+            Node* node = create_node(0);
+            node->next = l2;
+            l2 = node;
+
+            ptr1 = ptr1->next;
+        }
+        else {
+            ptr1 = ptr1->next;
+            ptr2 = ptr2->next;
+        }
+    }
+
+    int carry = 0;
+    Node* dummy = create_node(-1);
+    dummy->next = additionAlgorithm(l1, l2, &carry);
+
+    if (carry)
+        dummy->data = 1;
+    else
+        dummy = dummy->next;
+
+    return dummy;
+}
