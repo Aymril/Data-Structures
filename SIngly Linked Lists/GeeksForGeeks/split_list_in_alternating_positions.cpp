@@ -1,3 +1,5 @@
+/// iterative solution
+
 void alternatingSplitList(ListNode* head, ListNode** a1, ListNode** b1) 
 {
     while(head) {
@@ -11,4 +13,24 @@ void alternatingSplitList(ListNode* head, ListNode** a1, ListNode** b1)
         }
     }
     *a1 = *b1 = nullptr;
+}
+
+
+// weird but nontheless, recursive solution.
+void alternatingSplitListRecursive(ListNode* head, ListNode** a1,
+                                   ListNode** b1) {
+    if (!head) {
+        *a1 = nullptr;
+        *b1 = nullptr;
+        return;
+    }
+
+    *a1 = head;
+
+    if (head->next) {
+        *b1 = head->next;
+        return alternatingSplitListRecursive(head->next->next, &(*a1)->next,
+                                             &(*b1)->next);
+    }
+    alternatingSplitListRecursive(head->next, &(*a1)->next, b1);
 }
