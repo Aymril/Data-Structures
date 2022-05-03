@@ -2,16 +2,15 @@ void removeDuplicates(Node** head) {
     Node* list = *head;
     while (list && list->next) {
         if (list->data == list->next->data) {
-            while (list && list->next && list->data == list->next->data) {
-                Node* temp = list->next;
-                list->next = list->next->next;
-                if (list->next) {
-                    list->next->prev = list;
-                }
-                delete temp;
+            Node* temp = list->next;
+            list->next = list->next->next;
+            if (list->next) {
+                list->next->prev = list;
             }
+            delete temp;
+        } else {
+            list = list->next;
         }
-        list = list->next;
     }
 }
 
