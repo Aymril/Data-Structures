@@ -1,6 +1,9 @@
-Okuyucunun dikkatine. C programlama dilinin yaraticilarin Ken Thompson; "When in doubt, use brute force." demistir. o yuzden, ilk olarak problemi cozmeye bakin. daha sonra optimize etmeye calisirsaniz daha verimli ve kolay olur sizin icin. ilk olarak elinizde bir sonuc olsun, olsun ki size bir fikir versin problem ve cozumu hakkinda.
+Okuyucunun dikkatine. C programlama dilinin yaraticilarin Ken Thompson; "When in doubt, use brute force" demistir. 
+o yuzden, ilk olarak problemi cozmeye bakin. daha sonra optimize etmeye calisirsaniz daha verimli ve kolay olur sizin icin. 
+ilk olarak elinizde bir sonuc olsun, olsun ki size bir fikir versin problem ve cozumu hakkinda.
 
-Bu problemi ilk olarak, tabii ki aklima gelen ilk yoldu, brute force kullanarak cozdum. sonra baska cozumlere baktim ve kendi yazdigim kodla karsilastirdim, boyle boyle yaparak kodu iyilestirdim. ve ayni zamanda en guzel cozumu benimsemeye ve icsellestirmeye basladim. bu surec icinde bazi teknikler de ogrendim.
+Bu problemi ilk olarak, tabii ki aklima gelen ilk yoldu, brute force kullanarak cozdum. sonra baska cozumlere baktim ve kendi yazdigim kodla karsilastirdim, boyle 
+boyle yaparak kodu iyilestirdim. ve ayni zamanda en guzel cozumu benimsemeye ve icsellestirmeye basladim. bu surec icinde bazi teknikler de ogrendim.
 
 
 
