@@ -148,3 +148,59 @@ Node* addTwoNumbers(Node* l1, Node* l2) {
 
     return dummy->next;
 }
+
+// leetcode'da gordum bu cozumu, inanilmaz hosuma gitti. Probleme cok baska bir yonden bakilmis.
+// No recursion/stack/reversing.
+
+int length_list(Node* head) {
+    int count = 0;
+    for (; head; head = head->next, ++count);
+    return count;
+}
+
+template <typename T>
+void swap(T& a, T& b) {
+    T temp = a;
+    a = b;
+    b = temp;
+}
+
+Node* addTwoNumbersNoRecursionStackReverse(Node* l1, Node* l2) {
+    int l1_length = length_list(l1);
+    int l2_length = length_list(l2);
+
+    if (l1_length < l2_length) {
+        swap(l1_length, l2_length);
+        swap(l1, l2);
+    }
+
+    Node* head = create_node(0);
+    Node** result = &head, * frontier = head;
+
+    for (int i = l1_length - l2_length; i > 0; --i, l1 = l1->next) {
+        (*result)->next = create_node(l1->data);
+        result = &(*result)->next;
+
+        if ((*result)->data < 9)
+            frontier = *result;
+    }
+
+    for (; l1; l1 = l1->next, l2 = l2->next) {
+        (*result)->next = create_node(l1->data + l2->data);
+        result = &(*result)->next;
+        if((*result)->data < 9) {
+            frontier = *result;
+        }
+        else if ((*result)->data > 9) {
+            while (frontier != *result) {
+                frontier->data += 1;
+                if (frontier->data == 10)
+                    frontier->data = 0;
+                frontier = frontier->next;
+            }
+            frontier->data -= 10;
+        }
+    }
+
+    return (head->data == 0) ? head->next : head;
+}
