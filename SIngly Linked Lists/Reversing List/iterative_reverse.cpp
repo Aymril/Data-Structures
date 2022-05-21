@@ -1,12 +1,12 @@
 Node* reverseIterative(Node* list) {
     if (!list) return list;
 
-    Node *prev = nullptr, *temp = list, *next;
+    Node *prev = nullptr, *next;
     while (temp) {
         next = temp->link;
-        temp->link = prev;
-        prev = temp;
-        temp = next;
+        head->link = prev;
+        prev = head;
+        head = next;
     }
     return prev;
 }
